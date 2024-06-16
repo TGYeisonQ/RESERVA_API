@@ -1,0 +1,5 @@
+.vs
+/bin/
+Web.API/obj/Debug/net8.0/Web.API.AssemblyInfo.cs
+Web.API/obj/Debug/net8.0/Web.API.AssemblyInfoInputs.cache
+Web.API/obj/Debug/net8.0/Web.API.assets.cache
