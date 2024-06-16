@@ -1,0 +1,59 @@
+name: dockercompose3316968174040401220
+services:
+  products.database:
+    container_name: products.database
+    environment:
+      POSTGRES_DB: booking
+      POSTGRES_PASSWORD: 1q2w3e@R
+      POSTGRES_USER: postgres
+    image: postgres:latest
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 5433
+      published: "5432"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: C:\Users\yeiso\Documents\Others_apps\Pruebas\RESERVA_API\products-db
+      target: /var/lib/postgresql/data
+      bind:
+        create_host_path: true
+  web.api:
+    build:
+      context: C:\Users\yeiso\Documents\Others_apps\Pruebas\RESERVA_API
+      dockerfile: src/Web.API/Dockerfile
+    container_name: products.webapi
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "6000"
+      ASPNETCORE_HTTPS_PORTS: "6001"
+    image: webapi
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 6000
+      published: "6000"
+      protocol: tcp
+    - mode: ingress
+      target: 6001
+      published: "6001"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: C:\Users\yeiso\AppData\Roaming/Microsoft/UserSecrets
+      target: /home/app/.microsoft/usersecrets
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\yeiso\AppData\Roaming/ASP.NET/Https
+      target: /home/app/.aspnet/https
+      read_only: true
+      bind:
+        create_host_path: true
+networks:
+  default:
+    name: dockercompose3316968174040401220_default
